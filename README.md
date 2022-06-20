@@ -19,10 +19,14 @@ Analysing the data, we see the distribution of male and female plotting certain 
 We calculated total male actors and total female actors across all films and find that the films
 predominantly cast male actors. 31%(3644) actors were females whereas 69%(8070) actors were
 male actors in speaking roles in Hollywood movies.
+![ttl_male_ttl_female](imgs/ttl_male_ttl_female.png)
+<span id="fig:fig_1" label="fig:fig_1"></span>
 
 **Has gender balance in speaking roles changed over time (i.e. years)?**  
 The gender balance has largely been tilted towards more male actors landing in speaking roles than
 female actors in films released from 1939 to 2015. The ratio remains almost the same all these years.
+![male_female_withtime](imgs/male_female_withtime.png)
+<span id="fig:fig_2" label="fig:fig_2"></span>
 
 **Do films in which men do more speaking make a lot more money than films in which women speak more?**  
 After determining the gender of the actors with most words in each film, we found that the films
@@ -30,6 +34,10 @@ which have more dialogues for male actors make more than 7 times the money than 
 have more dialogues for female actors. From the dataset, it was observed that 12%($14,411) of
 marketshare in Revenue goes to films where women spoke the most in comparison to 88%($101,073)
 marketshare in Revenue for the films where men spoke the most.  
+
+![spokemore](imgs/spokemore.png)
+<span id="fig:fig_3" label="fig:fig_3"></span>
+
 Based on the above observations which favor male lead actors or female, a worst-case classifier would
 have no more than 50-55% accuracy to classify the lead actor correctly.  
 
