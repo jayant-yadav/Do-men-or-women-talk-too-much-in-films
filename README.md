@@ -74,10 +74,10 @@ Just like LDA, QDA works on the same principals and is used to classify data tha
 
 The training set of 1037 data points are divided into 70/30 train and validation set, giving us a mean accuracy of 89.7\% and the following confusion matrix, where 'Male' lead was set as 1 and 'Female' lead as 0:
 
-|Lead| Female| Male |
-|---|------|-----|
-|Female |65 | 26 |
-|Male | 6 | 215 |
+| Lead | Female | Male |
+| --- | ------ | ----- |
+| Female |65 | 26 |
+| Male | 6 | 215 |
     
 
 As per K-fold cross validation method with k = 10 and shuffling the data before splitting them in train and validation sets, we receive an average accuracy of **87.3%** with a standard deviation of 3.8%.
@@ -106,11 +106,60 @@ For tree-based methods, we use Random Forest and Gradient Boosting. Random Fores
 
 ### Playing with features
 
+
+Plotting a correlation matrix for the 13 variables provided in figure below.
+
+As per the correlation matrix, considering the variables with values in the ranges [-1,-0.19] and [0.1,1], tells us that the variables *Gross'*(0.05), *'Number words female'*(0.05), *'Number words male'*(0.04) and *'Year'*(-0.07) have very little influence on the class *'Lead'*, lesser than what variables like *'Age Co-Lead','Age Lead','Number of female actors','Number of male actors','Difference in words lead and co-lead', 'Number of words lead'* have.
+
+After omitting few combinations of the given variables we find the following variations(percentage) in the mean predictions using cross validation:
+
+Performance of different models on omitted variables:  
+    | Variables | Logistic  Regression | LDA | QDA | KNN (70/30 split) | Random forest | Boosting |  
+    | --------- | ----------------- | ----- | ----- | ----------------- | ------------ | ------- |  
+    | "Number words female", "Number words male" | 79.9 | 79.6 | 81.1 | 77.88  | 79.3 | 77.9 |  
+    | "Year" | 87.3  | 86 | 87.9 | 79.17    | 78.9 | 80.7 |  
+    | "Gross" | 87.4   | 86.2 | 86.6 | 79.17 | 80.2 | 81.1 |  
+    | none omitted | 87.1  | 86 | 87.3 | 79.81 | 80.5 | 85.3 |  
+    
+QDA score increases when we remove "Year" variable as a feature. Which was expected from our EDA, wherein it was observed that the ratio of male and female actors in the films largely remained the same all throughout the years, indicating that this variable does nothing to predict the gender of the lead.
+
+
+As for KNN, by deleting "Number words female" and "Number words male", we get the obvious lower result of accuracy compared to the one without omitting. It indicates some level of explanations that words spoken by males and females contribute to the actor gender prediction. But not that much, the result conforms to the one shown in EDA. Moreover, the accuracy score just floats a little by training the KNN models without either "Year" or "Gross". It shows that either year of release or money made by film is not the decisive factor of predicting whether an lead actor is male or female.
+
+For Tree-based methods we use two feature importance metrics, by Gini coefficient and permutation importance. Gini importance calculates the average purity for each node of all trees for a specific features. For permutation feature importance we compare the full model vs randomly peturbing the feature of interest, therefore adding noise and seeing the total contribution to the classification. In the full model where all variables are included for the feature importance we achieved a 85% accuracy vs a 81% for features that we are seeing the removal from "Number words female", "Gross" and "Year". We see that the most important variable is "Number words female". We show the Feature Permutation Importance in Figure 5.
+
+![FI_Boost](imgs/FI_Boost.png)
+<span id="fig:fig_4" label="fig:fig_4"></span>
+
 ### Discussion  
+
+According to the EDA, it seems evident to make a conclusion that men dominate speaking roles in Hollywood movies. In our classifier models, "Year" is an unimportant variable to determine whether the actor is male or female. It indicates some levels of explanations that gender balance in speaking roles has not changed much over time. It is a pity to see that till today, females have less opportunities to dominate speaking roles. 
+
+Also, the "Gross" feature takes less important part in predicting the gender of actor. In our opinion, the films in which men do more speaking make a lot more money than films in which women speak more can happen, but the factor is not only the number of words spoken by male but also their numbers in the movies. If a movie has more male speaking roles, under the positive correlation between "Number words male" and "Number of male actors", men speak more. Both of them lead to a phenomenon that men make more money.
+
+From the analysis we have done, the number of words spoken by females and number of female actors are important features. We can see its clear separation when plotted in Fig 6. It makes a lot of sense that both are important features of determination especially since most films are male-dominated, so its a good way to determine the movies lead.
+
+Missing from our analysis or for future exploration would be if this same patterns that we see throughout can also be seen in different genres where maybe certain futures would make better separation of the data.
+
+![number of Male vs number of female](imgs/Numb_MA_Numb_FA.png)
+<span id="fig:fig_5 label="fig:fig_5"></span>
 
 ## Production method  
 
+After going through all 6 classification methods, it is finalized to make Quadratic Discriminant Analysis as our best production method which has given us the highest accuracy to predict the gender of the lead with cross-validation. 
+
 ## Conclusions  
+
+In our analysis we found that the best method that performed well on the data was QDA with the highest score of 87.9\% after performing feature tuning and performed worst in the case of KNN with the highest accuracy of 79.81\%. It tells us that the data is nonlinearly seperable as it was better modeled by QDA.  
+
+   | Models | Accuracy |  
+   | ---------- | --------- |   
+   | Logistic Regression | 87.4% |  
+   | LDA | 86.2% |  
+   | QDA  | 87.9 %  |  
+   | KNN | 79.81%  |  
+   | Random Forest | 80%  |  
+   | Gradient Boosting | 85%  |  
 
 ## References  
 https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html  
