@@ -114,12 +114,12 @@ As per the correlation matrix, considering the variables with values in the rang
 After omitting few combinations of the given variables we find the following variations(percentage) in the mean predictions using cross validation:
 
 Performance of different models on omitted variables:  
-    | Variables | Logistic  Regression | LDA | QDA | KNN (70/30 split) | Random forest | Boosting |  
-    | --------- | ----------------- | ----- | ----- | ----------------- | ------------ | ------- |  
-    | "Number words female", "Number words male" | 79.9 | 79.6 | 81.1 | 77.88  | 79.3 | 77.9 |  
-    | "Year" | 87.3  | 86 | 87.9 | 79.17    | 78.9 | 80.7 |  
-    | "Gross" | 87.4   | 86.2 | 86.6 | 79.17 | 80.2 | 81.1 |  
-    | none omitted | 87.1  | 86 | 87.3 | 79.81 | 80.5 | 85.3 |  
+| Variables | Logistic Regression | LDA | QDA | KNN (70/30 split) | Random forest | Boosting |  
+| --------- | ----------------- | ----- | ----- | ----------------- | ------------ | ------- |  
+| "Number words female", "Number words male" | 79.9 | 79.6 | 81.1 | 77.88  | 79.3 | 77.9 |  
+| "Year" | 87.3  | 86 | 87.9 | 79.17    | 78.9 | 80.7 |  
+| "Gross" | 87.4   | 86.2 | 86.6 | 79.17 | 80.2 | 81.1 |  
+| none omitted | 87.1  | 86 | 87.3 | 79.81 | 80.5 | 85.3 |  
     
 QDA score increases when we remove "Year" variable as a feature. Which was expected from our EDA, wherein it was observed that the ratio of male and female actors in the films largely remained the same all throughout the years, indicating that this variable does nothing to predict the gender of the lead.
 
@@ -141,7 +141,7 @@ From the analysis we have done, the number of words spoken by females and number
 
 Missing from our analysis or for future exploration would be if this same patterns that we see throughout can also be seen in different genres where maybe certain futures would make better separation of the data.
 
-![number of Male vs number of female](imgs/Numb_MA_Numb_FA.png)
+![number_male_female](imgs/Numb_MA_Numb_FA.png)
 <span id="fig:fig_5 label="fig:fig_5"></span>
 
 ## Production method  
