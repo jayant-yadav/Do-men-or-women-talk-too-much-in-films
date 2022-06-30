@@ -85,7 +85,22 @@ As per K-fold cross validation method with k = 10 and shuffling the data before 
 
 ### K-Nearest Neighbour (KNN)  
 
+In a classification task, K-Nearest Neighbor method classifies a given point to a certain categorical label by finding the closest distances between the point and all other K numbers of data points in the dataset. Usually, Euclidean distance is taking as a measure of distance. In practice, to find the best value of K, we use a for loop to calculate the error rates toward different values of K. And then choose the K with lowest error to train the model. An optimal value of K has to be found out because lower value may lead to over-fitting issue, and higher value of K may require more computational complication in distance.
+
+Before building the for loop, we split the dataset into training dataset and validation dataset which is including 30 percent of data. And then do the scaling on the dataset. Because the statistical principle of KNN is to calculate the distances between data points, it is easier to calculate it with the process of normalization. After that, we use a for loop to get the error rates with various values of K from 1 to 50 so that We find the best choice of K is 4 with minimum error rate **20.19%**. Then we train the KNN model using the best K, and compare the prediction results with the validation dataset to have the final accuracy score **79.81%**. The confusion matrix is shown as follows.
+
+|Lead| Female| Male |
+|---|------|-----|
+|Female |42 | 46 |
+|Male | 17 | 207 |
+
+
+There are some pros of using the KNN algorithm. First, it is easy to implement and runs faster than other algorithms such as linear regression, SVM and so on. Second, there is only one parameter required to be found the best one in KNN, that is, the value of K. There are also some cons of using it. First, it cannot deal with datasets with large amount of dimensions well because it is difficult to calculate Euclidean distance in each dimension. Second, it does not work well with categorical features due to the difficulties in calculating distances with categorical features.
+
+
 ### Tree-Based Methods
+
+For tree-based methods, we use Random Forest and Gradient Boosting. Random Forest uses bags of trees to average out the decision for classification and extreme gradient boosting uses regularization for building trees and classifying. Extreme Gradient Boosting uses weak learners and iterates from previous trees to provide a better prediction minimizing the objective function with each iteration and using space efficient processing. In our project, we find the optimal tree depth to be 7 for random forest, with cross-validation k=10-folds. For Extreme Gradient Boosting, we find the optimal parameters through a grid search with the optimal tree depth of 7 using AUC as the scoring determinant of best score for optimal parameters. For Random Forest we obtain a 90% training accuracy and testing accuracy of **80%**. Whereas for Gradient Boosting, we obtain a 98% training accuracy and **85%** in testing accuracy. 
 
 ## Feature Importance
 
