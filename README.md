@@ -44,11 +44,44 @@ have no more than 50-55% accuracy to classify the lead actor correctly.
 ## Methods of Classification  
 We use five main methods of classification: Logistic Regression, LDA, QDA, K-Nearest Neighbour and Tree Based Methods  
 
-### Logistic Regression
+### Logistic Regression  
+A binary Logistic regression is a binary classifier which takes in the data variables and gives the likelihood in which the data point should lie into one of the two classes. The decision boundary can be either linear or non-linear in nature. Solver used to run logistic regression was 'lbfgs', which comes as the default for this classifier. The max_iter parameter was changed from 100 to 10000 iterations for the best results and all the input variables were considered.  
+
+The training set of 1037 data points are divided in 70/30 test and validation set, giving us a mean accuracy of 85.9% and the following confusion matrix, where 'Male' lead was set as 1 and 'Female' lead as 0:  
+|Lead| Female| Male |
+|---|------|-----|
+|Female |55 | 36 |
+|Male | 8 | 213 |
+
+Since retraining the model with 70/30 uses the same data and can cause overfitting, we used K-fold cross validation to hold out some part of training data while retraining the model. In this way we ensured that the model does not run on the same data and overfits.  
+As per K-fold cross validation method with 10 "folds" the model was trained on 9 folds and tested on the 10th fold. This was done 10 times and then the performance was averaged out from all the splits, finally we receive an average accuracy of **87.1%** with a standard deviation of 2.9% .  
 
 ### Linear Discriminant Analysis (LDA)  
+LDA is a linear classifier also used for dimensionality reduction. It works by increasing the variability between the classes but reducing the separability of each data point within the class. This method is popular for preprocessing the data like images to reduce the number of features, but is not so effective when there is non-linearly separable class to deal with. The model assumes that the input data is normally distributed and each class has identical covariance matrices. We ran the LDA using *LinearDiscriminantAnalysis()* method in sklearn library, with default solver ie. *svd* (singular value decomposition)
+
+The training set of 1037 data points are divided in 70/30 train and validation set, giving us a mean accuracy of 84% and the following confusion matrix, where 'Male' lead was set as 1 and 'Female' lead as 0:
+
+|Lead| Female| Male |
+|---|------|-----|
+|Female |52 | 39 |
+|Male | 11 | 210 |
+
+As per K-fold cross validation method with k = 10 and shuffling the data before splitting them in train and validation sets, we receive an average accuracy of **86\%**  with a standard deviation of 2.9%.
 
 ### Quadratic Discriminant Analysis (QDA)  
+
+Just like LDA, QDA works on the same principals and is used to classify data that are non-linearly separable. This means that this method works on classes that have nonidentical covariance as opposed to LDA. In a similar fashion, *QuadraticDiscriminantAnalysis()* method is used with the default solver *svd* 
+
+The training set of 1037 data points are divided into 70/30 train and validation set, giving us a mean accuracy of 89.7\% and the following confusion matrix, where 'Male' lead was set as 1 and 'Female' lead as 0:
+
+|Lead| Female| Male |
+|---|------|-----|
+|Female |65 | 26 |
+|Male | 6 | 215 |
+    
+
+As per K-fold cross validation method with k = 10 and shuffling the data before splitting them in train and validation sets, we receive an average accuracy of **87.3%** with a standard deviation of 3.8%.
+
 
 ### K-Nearest Neighbour (KNN)  
 
